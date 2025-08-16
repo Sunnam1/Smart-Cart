@@ -1,0 +1,311 @@
+/* Base Styles */
+:root {
+  --primary: #0066ff;
+  --primary-dark: #02408d;
+  --secondary: #00e6b8;
+  --light: #fafbfc;
+  --dark: #16192c;
+  --success: #3dc98f;
+  --danger: #d7263d;
+  --warning: #ffbe76;
+  --info: #008bfe;
+  --card-bg: #ffffff;
+  --text: #16192c;
+  --text-light: #556074;
+  --shadow: 0 6px 24px rgba(0,0,0,0.13);
+}
+
+.dark-mode {
+  --primary: #00e6b8;
+  --primary-dark: #006f5b;
+  --secondary: #008bfe;
+  --light: #16192c;
+  --dark: #fafbfc;
+  --card-bg: #232b45;
+  --text: #fafbfc;
+  --text-light: #b2bec3;
+  --shadow: 0 6px 24px rgba(0,0,0,0.35);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #01437f 0%, #2b2e4a 100%);
+  color: var(--text);
+  transition: all 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Time-based themes */
+.morning {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+}
+.afternoon {
+    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+}
+.evening {
+    background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+}
+.night {
+    background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+}
+
+/* Glassmorphism Effect */
+.glass-card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  border: 1px solid rgba(0,102,255,0.08);
+  box-shadow: var(--shadow);
+}
+
+.glass-navbar {
+  background: rgba(0, 38, 84, 0.19) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* Particles Background */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(0, 230, 184, 0.24);
+  border-radius: 50%;
+  animation: float 14s infinite linear;
+}
+
+.particle:nth-child(1) {
+    width: 200px;
+    height: 200px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+    width: 300px;
+    height: 300px;
+    top: 60%;
+    left: 70%;
+    animation-delay: 5s;
+}
+
+.particle:nth-child(3) {
+    width: 150px;
+    height: 150px;
+    top: 80%;
+    left: 30%;
+    animation-delay: 10s;
+}
+
+/* Hero Section */
+.hero {
+  padding: 120px 0;
+  position: relative;
+  color: var(--text);
+}
+
+.hero-illustration {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+    transition: transform 0.5s ease;
+}
+.hero-illustration:hover {
+    transform: scale(1.03) rotate(-2deg);
+}
+
+/* Feature Cards */
+.feature-card {
+    padding: 30px;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: var(--primary);
+    margin: 0 auto;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background-color: var(--secondary);
+  color: var(--dark);
+  border: none;
+  box-shadow: 0 0 20px rgba(0, 230, 184, 0.25);
+}
+
+
+.btn-primary:hover {
+  background-color: #00ba99;
+  color: #fff;
+  box-shadow: 0 0 25px rgba(0, 230, 184, 0.40);
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  background: none;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-glow {
+    box-shadow: 0 0 15px rgba(108, 92, 231, 0.5);
+}
+
+.btn-glow:hover {
+    box-shadow: 0 0 25px rgba(108, 92, 231, 0.7);
+}
+
+/* Dark Mode Toggle */
+#darkModeToggle {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .hero { padding: 80px 0; text-align: center; }
+  .hero-illustration { margin-top: 40px; }
+}
+
+.blended-image {
+  box-shadow: 0 8px 32px 0 rgba(44, 62, 80, 0.28);
+  border-radius: 16px; 
+  position: relative;
+  z-index: 1;      /* Soft corners for better blend */
+}
+
+.image-container {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(9px);
+  padding: 20px;
+  border-radius: 18px;
+  display: inline-block;
+}
+
+
+.image-container::before {
+  content:"";
+  position: absolute;
+  top:0;left:0;right:0;bottom:0;
+  background: linear-gradient(135deg, #6e8efb 0%, #a777e3 100%);
+  opacity:0.18;
+  z-index: 0;
+  border-radius:18px;
+}
+
+.feature-img-circle {
+    width: 80px;
+    height: 80px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(80,70,180,0.09);
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.feature-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid rgba(120,100,220,0.17);
+    box-shadow: 0 3px 10px rgba(80, 70, 180, 0.09);
+}
+
+/* Fix width and container alignment for 100% view */
+.container-xl {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* Sidebar wider and scrollable on large screens, stacks on mobile */
+.sidebar {
+  min-width: 220px;
+  max-width: 330px;
+}
+
+@media (max-width: 991px) {
+  .container-xl {
+    max-width: 100%;
+  }
+  .sidebar {
+    max-width: 100%;
+    min-width: 100%;
+    margin-bottom: 24px;
+  }
+}
+
+.main-content {
+  min-width: 0;
+}
+
+/* Ensure equal spacing between columns */
+.row.gx-4 {
+  --bs-gutter-x: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .col-lg-3, .col-lg-6, .col-md-4, .col-md-8 {
+    max-width: 100% !important;
+    flex-basis: 100% !important;
+  }
+  .recommendation-section {
+    padding: 0.7rem !important;
+  }
+}
+
+.welcome-card {
+  min-width: 0;
+  word-break: break-word;
+}
+
+.recommendation-section {
+  padding: 1.7rem 1rem 1.2rem 1rem;
+  min-width: 0;
+}
+
+/* Keep all other existing CSS as-is, don't remove any function, effect, or variable */
