@@ -1,7 +1,7 @@
 /* Base Styles */
 :root {
-  --primary: #0066ff;
-  --primary-dark: #02408d;
+  --primary: #578ddfff;
+  --primary-dark: #407dc7ff;
   --secondary: #00e6b8;
   --light: #fafbfc;
   --dark: #16192c;
@@ -29,7 +29,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #01437f 0%, #2b2e4a 100%);
+  background: linear-gradient(135deg, #0d5ba4ff 0%, #1d2dbeff 100%);
   color: var(--text);
   transition: all 0.3s ease;
   min-height: 100vh;
@@ -307,5 +307,3 @@ body {
   padding: 1.7rem 1rem 1.2rem 1rem;
   min-width: 0;
 }
-
-/* Keep all other existing CSS as-is, don't remove any function, effect, or variable */
