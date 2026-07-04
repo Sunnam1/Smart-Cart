@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "p1": {"name": "Laptop Pro", "category": "electronics"},
     "p2": {"name": "Wireless Mouse", "category": "electronics"},
@@ -5,3 +6,12 @@
     "coffee1": {"name": "Coffee Beans", "category": "beverages"},
     "snack1": {"name": "Chips", "category": "snacks"}
 }
+=======
+{
+    "p1": {"name": "Laptop Pro", "category": "electronics"},
+    "p2": {"name": "Wireless Mouse", "category": "electronics"},
+    "p3": {"name": "Laptop Bag", "category": "accessories"},
+    "coffee1": {"name": "Coffee Beans", "category": "beverages"},
+    "snack1": {"name": "Chips", "category": "snacks"}
+}
+>>>>>>> a0f07985998994b38151c3375e9d8099f0a50008

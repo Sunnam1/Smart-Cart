@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" class="morning">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCart - AI Recommendations</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome@6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/animations.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background Particles -->
+    <div class="particles-container">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark glass-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-robot me-2"></i>SmartCart
+            </a>
+            <div class="d-flex">
+                <button id="darkModeToggle" class="btn btn-sm btn-outline-light me-2">
+                    <span id="themeIcon">
+                        <i class="fas fa-moon"></i> 
+                    </span>
+                </button>
+                <a href="dashboard.html" class="btn btn-primary btn-glow">
+                    Live Demo <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-3 fw-bold mb-4 slide-up">Smart Product Recommendations</h1>
+                    <p class="lead mb-4 fade-in">AI-powered suggestions that adapt to your behavior in real-time</p>
+                    <div class="d-flex gap-3">
+                        <a href="dashboard.html" class="btn btn-lg btn-primary px-4 btn-glow">
+                            Try Live Demo <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                        <a href="#features" class="btn btn-lg btn-outline-light px-4">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-illustration floating">
+                        <img src="assets/ai-visualization.png" alt="AI-powered Recommendation Engine" class="img-fluid blended-image" width="250">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Features Section -->
+<section id="features" class="features py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 slide-up">How It Works</h2>
+        <div class="row g-4">
+
+            <!-- Real-Time Analysis -->
+            <div class="col-md-4">
+                <div class="feature-card glass-card slide-up" style="animation-delay: 0.1s;">
+                    <div class="feature-img-circle mb-3 pulse">
+                        <img src="assets/real-time.png" alt="Real-Time Analysis" class="feature-img">
+                    </div>
+                    <h3>Real-Time Analysis</h3>
+                    <p>Processes user actions instantly to provide up-to-the-second recommendations</p>
+                </div>
+            </div>
+
+            <!-- Context-Aware -->
+            <div class="col-md-4">
+                <div class="feature-card glass-card slide-up" style="animation-delay: 0.2s;">
+                    <div class="feature-img-circle mb-3 pulse">
+                        <img src="assets/context-aware.png" alt="Context-Aware" class="feature-img">
+                    </div>
+                    <h3>Context-Aware</h3>
+                    <p>Considers location, time of day, and device for perfect suggestions</p>
+                </div>
+            </div>
+
+            <!-- Self-Learning -->
+            <div class="col-md-4">
+                <div class="feature-card glass-card slide-up" style="animation-delay: 0.3s;">
+                    <div class="feature-img-circle mb-3 pulse">
+                        <img src="assets/self learning.png" alt="Self Learning" class="feature-img">
+                    </div>
+                    <h3>Self-Learning</h3>
+                    <p>Improves over time by analyzing user engagement patterns</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+<!-- Footer -->
+<footer class="text-white text-center py-4 mt-5" style="background-color: #0000006f;">
+  <div class="container" style="background-color: transparent;">
+    <p class="mb-1">© 2025 . All rights reserved.</p>
+    <p class="mb-1">Developed by Capstone Group 48 </p>
+    <p class="mb-1">
+      Email: <a href="mailto: SmartCart@gmail.com" style="color: #ffc107;">SmartCart@gmail.com</a>
+    </p>
+    <p class="mb-0">VIT Bhopal University | Academic Year: 2025–2026</p>
+  </div>
+</footer>
+
+</body>
+</html>

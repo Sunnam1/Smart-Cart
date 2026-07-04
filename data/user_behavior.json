@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 {
     "user1": [{"action": "purchase", "product": "p1"}],
     "user2": [{"action": "purchase", "product": "p2"}],
     "user3": [{"action": "purchase", "product": "p3"}]
 }
+=======
+{
+    "user1": [{"action": "purchase", "product": "p1"}],
+    "user2": [{"action": "purchase", "product": "p2"}],
+    "user3": [{"action": "purchase", "product": "p3"}]
+}
+>>>>>>> a0f07985998994b38151c3375e9d8099f0a50008
