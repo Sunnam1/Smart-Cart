@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Smart Cart - Real-Time Recommendations</title>
+<style>
+  /* Reset & base styles */
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 20px;
+    background: #f9fafb; color: #2c3e50;
+    display: flex; flex-direction: column; align-items: center;
+    min-height: 100vh;
+  }
+  h1 { margin-bottom: 25px; color: #34495e; font-weight: 700; font-size: 2.2rem; }
+  select {
+    padding: 8px 14px; font-size: 1.1rem; margin-bottom: 30px;
+    border-radius: 6px; border: 2px solid #3498db; cursor: pointer;
+    outline-offset: 2px; transition: border-color 0.3s ease;
+  }
+  select:focus { border-color: #2980b9; }
+
+  #recommendations {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+    gap: 20px; width: 100%; max-width: 960px;
+  }
+  .rec-section {
+    background: white; border-radius: 12px; padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.09);
+    display: flex; flex-direction: column;
+  }
+  .rec-section h3 {
+    margin-top: 0; margin-bottom: 16px; color: #2471a3; font-size: 1.3rem;
+    border-bottom: 2px solid #3498db; padding-bottom: 6px;
+  }
+  ul.rec-list {
+    list-style-type: none; padding-left: 0; overflow-y: auto;
+    max-height: 330px; margin: 0;
+  }
+  ul.rec-list li {
+    padding: 8px 0; display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid #e2e8f0; transition: background-color 0.15s ease;
+  }
+  ul.rec-list li:hover { background-color: #ebf5fb; }
+  .product-info { display: flex; align-items: center; gap: 12px; }
+  .product-img {
+    width: 52px; height: 52px; border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12); object-fit: cover;
+  }
+  button.add-cart-btn {
+    background: #3498db; border: none; padding: 8px 16px; border-radius: 8px;
+    color: white; font-weight: 600; cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  button.add-cart-btn:hover { background: #217dbb; }
+  button.add-cart-btn:focus { outline: 3px solid #85c1e9; outline-offset: 2px; }
+
+  #cartSection {
+    margin-top: 35px; width: 100%; max-width: 960px;
+    background: white; padding: 20px; border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+  #cartSection h2 {
+    margin-top: 0; font-weight: 700; font-size: 1.6rem; color: #27ae60;
+    border-bottom: 3px solid #2ecc71; padding-bottom: 8px;
+  }
+  ul#cartList {
+    list-style-type: none; padding-left: 0; margin: 0; font-size: 1.1rem;
+    max-height: 160px; overflow-y: auto;
+  }
+  ul#cartList li {
+    padding: 10px 0; border-bottom: 1px solid #dbe6f1; font-weight: 600;
+    display: flex; align-items: center; gap: 12px;
+  }
+  ul#cartList li .product-img { width: 42px; height: 42px; }
+
+  #messages {
+    margin-top: 16px; min-height: 28px;
+    font-weight: 600; font-size: 1rem;
+    opacity: 0; transition: opacity 0.35s ease;
+  }
+  #messages.show { opacity: 1; }
+  #messages.success { color: #27ae60; }
+  #messages.error { color: #e74c3c; }
+
+  @media (max-width: 640px) {
+    #recommendations { grid-template-columns: 1fr; }
+    .product-img { width: 44px; height: 44px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Smart Cart - Real-Time Recommendations</h1>
+
+<select id="userSelect" aria-label="Select user for recommendations">
+  <option value="user1">User 1</option>
+  <option value="user2">User 2</option>
+  <option value="user3">User 3</option>
+</select>
+
+<div id="messages" role="alert" aria-live="assertive"></div>
+
+<div id="recommendations"></div>
+
+<div id="cartSection" aria-live="polite" aria-label="Your shopping cart">
+  <h2>Your Cart</h2>
+  <ul id="cartList"></ul>
+</div>
+
+<script>
+  let productData = {};
+  let currentUser = 'user1';
+
+  async function fetchProductData() {
+    try {
+      productData = await fetch('/products').then(res => res.json());
+    } catch {
+      productData = {};
+      showMessage('Failed to load product data.', true);
+    }
+  }
+
+  async function loadCart() {
+    try {
+      const cartItems = await fetch(`/cart?user_id=${currentUser}`).then(res => res.json());
+      const cartList = document.getElementById('cartList');
+      cartList.innerHTML = '';
+
+      if (!Array.isArray(cartItems) || cartItems.length === 0) {
+        cartList.innerHTML = '<li>Your cart is empty.</li>';
+        return;
+      }
+
+      cartItems.forEach(item => {
+        const li = document.createElement('li');
+        const img = document.createElement('img');
+        img.className = 'product-img';
+        img.src = item.img || 'https://via.placeholder.com/52?text=No+Img';
+        img.alt = item.name || item.id;
+
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = item.name || item.id;
+
+        li.appendChild(img);
+        li.appendChild(nameSpan);
+        cartList.appendChild(li);
+      });
+    } catch {
+      showMessage('Failed to load cart data.', true);
+    }
+  }
+
+  async function loadRecs() {
+    currentUser = document.getElementById('userSelect').value;
+    try {
+      await fetchProductData();
+      const res = await fetch(`/recommendations?user_id=${currentUser}`);
+      const data = await res.json();
+      renderRecommendations(data);
+      await loadCart();
+      clearMessage();
+    } catch {
+      showMessage('Unable to load recommendations.', true);
+    }
+  }
+
+  function renderRecommendations(data) {
+    const container = document.getElementById('recommendations');
+    container.innerHTML = '';
+
+    if (!data || Object.keys(data).length === 0) {
+      container.innerHTML = '<p>No recommendations available right now.</p>';
+      return;
+    }
+
+    for (const [sectionKey, ids] of Object.entries(data)) {
+      const section = document.createElement('section');
+      section.className = 'rec-section';
+
+      const heading = document.createElement('h3');
+      heading.textContent = formatLabel(sectionKey);
+      section.appendChild(heading);
+
+      if (ids.length === 0) {
+        section.innerHTML += '<p>No recommendations.</p>';
+      } else {
+        const list = document.createElement('ul');
+        list.className = 'rec-list';
+
+        ids.forEach(pid => {
+          const li = document.createElement('li');
+
+          const prodDiv = document.createElement('div');
+          prodDiv.className = 'product-info';
+
+          const img = document.createElement('img');
+          img.className = 'product-img';
+          img.src = productData[pid]?.img || 'https://via.placeholder.com/52?text=No+Img';
+          img.alt = productData[pid]?.name || pid;
+
+          const nameSpan = document.createElement('span');
+          nameSpan.textContent = productData[pid]?.name || pid;
+
+          prodDiv.appendChild(img);
+          prodDiv.appendChild(nameSpan);
+
+          const btn = document.createElement('button');
+          btn.className = 'add-cart-btn';
+          btn.textContent = 'Add to Cart';
+          btn.onclick = () => addToCart(pid);
+
+          li.appendChild(prodDiv);
+          li.appendChild(btn);
+          list.appendChild(li);
+        });
+
+        section.appendChild(list);
+      }
+      container.appendChild(section);
+    }
+  }
+
+  async function addToCart(productId) {
+    try {
+      const resp = await fetch('/track_behavior', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_id: currentUser,
+          action: 'add_to_cart',
+          product_id: productId
+        }),
+      });
+      const result = await resp.json();
+
+      if (result.status === 'logged') {
+        showMessage(`Added "${productData[productId]?.name || productId}" to your cart.`);
+        await loadCart();
+        await loadRecs();
+      } else {
+        showMessage('Failed to add item to cart.', true);
+      }
+    } catch {
+      showMessage('Error communicating with server.', true);
+    }
+  }
+
+  function showMessage(message, isError = false) {
+    const msgDiv = document.getElementById('messages');
+    msgDiv.textContent = message;
+    msgDiv.className = `show ${isError ? 'error' : 'success'}`;
+    if (message) {
+      setTimeout(() => {
+        msgDiv.textContent = '';
+        msgDiv.className = '';
+      }, 3500);
+    }
+  }
+
+  function clearMessage() {
+    showMessage('');
+  }
+
+  function formatLabel(key) {
+    switch (key) {
+      case 'history_based': return 'Based on Your Purchase History';
+      case 'similar_products': return 'Similar Products';
+      case 'cart_based': return 'Frequently Bought Together';
+      case 'time_based': return 'Trending Now (Time-based)';
+      default: return key;
+    }
+  }
+
+  document.getElementById('userSelect').addEventListener('change', loadRecs);
+
+  window.onload = () => {
+    loadRecs();
+    setInterval(loadRecs, 20000);
+  };
+</script>
+
+</body>
+</html>
+

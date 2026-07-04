@@ -1,0 +1,7 @@
+{
+    "p1": {"name": "Laptop Pro", "category": "electronics"},
+    "p2": {"name": "Wireless Mouse", "category": "electronics"},
+    "p3": {"name": "Laptop Bag", "category": "accessories"},
+    "coffee1": {"name": "Coffee Beans", "category": "beverages"},
+    "snack1": {"name": "Chips", "category": "snacks"}
+}
